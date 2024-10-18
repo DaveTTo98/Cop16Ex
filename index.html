@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR con AR.js y A-Frame</title>
-  <!-- Importar A-Frame y AR.js -->
-  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+  <!-- Importar A-Frame 1.6.0 y AR.js -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
 
@@ -39,6 +39,7 @@
 
   <!-- Escena A-Frame -->
   <a-scene
+    id="sceneId"
     vr-mode-ui="enabled: false;"
     renderer="logarithmicDepthBuffer: true;"
     embedded
@@ -58,12 +59,19 @@
         gltf-model="model/animacion.glb" 
         scale="0.3 0.3 0.3"
         position="0 0 0" 
-        animation-mixer="clip: *;loop: repeat;"
+        animation-mixer="clip: *; loop: repeat;"
       >
       </a-entity>
     </a-nft>
     <!-- Cámara estática que se mueve según los movimientos del dispositivo -->
     <a-entity camera></a-entity>
   </a-scene>
+
+  <!-- Ocultar el loader después de la carga completa -->
+  <script>
+    window.addEventListener('arjs-nft-loaded', (event) => {
+      document.querySelector('.arjs-loader').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
