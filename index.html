@@ -11,7 +11,7 @@
 
   <!-- Estilos para el loader -->
   <style>
-    .arjs-loader {
+    .loader {
       height: 100%;
       width: 100%;
       position: absolute;
@@ -22,19 +22,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .arjs-loader div {
-      text-align: center;
-      font-size: 1.25em;
       color: white;
+      font-size: 1.5em;
+    }
+    #sceneId {
+      display: none; /* Ocultar la escena inicialmente */
     }
   </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
-  <!-- Loader mínimo mostrado hasta que se carguen los descriptores de imagen -->
-  <div class="arjs-loader">
-    <div>Cargando, por favor espera...</div>
+  <!-- Pantalla de carga -->
+  <div class="loader" id="loader">
+    <div>Solicitando permisos para la cámara...</div>
   </div>
 
   <!-- Escena A-Frame -->
@@ -67,11 +66,25 @@
     <a-entity camera></a-entity>
   </a-scene>
 
-  <!-- Ocultar el loader después de la carga completa -->
+  <!-- Script para manejar la carga y los permisos -->
   <script>
-    window.addEventListener('arjs-nft-loaded', (event) => {
-      document.querySelector('.arjs-loader').style.display = 'none';
-    });
+    // Función para solicitar permisos
+    async function requestCameraPermissions() {
+      try {
+        // Solicitar permiso para la cámara
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        // Permiso concedido, ocultar la pantalla de carga y mostrar la escena
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('sceneId').style.display = 'block';
+      } catch (error) {
+        // Manejar error al solicitar permiso
+        console.error("Permiso denegado:", error);
+        document.getElementById('loader').innerText = "Permiso denegado. No se puede iniciar la AR.";
+      }
+    }
+
+    // Iniciar la solicitud de permisos al cargar la página
+    window.addEventListener('load', requestCameraPermissions);
   </script>
 </body>
 </html>
