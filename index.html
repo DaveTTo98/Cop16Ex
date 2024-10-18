@@ -9,30 +9,37 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
 
-  <!-- Estilos para el loader -->
+  <!-- Estilos para la pantalla inicial -->
   <style>
-    .loader {
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .initial-screen {
       height: 100%;
       width: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
+      background: url('assets/esap-cop.png') no-repeat center center;
+      background-size: cover;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       color: white;
       font-size: 1.5em;
+      text-align: center;
+      z-index: 9999; /* Asegúrate de que esté por encima de la escena */
     }
     #sceneId {
       display: none; /* Ocultar la escena inicialmente */
     }
   </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
-  <!-- Pantalla de carga -->
-  <div class="loader" id="loader">
+<body>
+  <!-- Pantalla inicial con imagen y mensaje -->
+  <div class="initial-screen" id="initialScreen">
     <div>Solicitando permisos para la cámara...</div>
   </div>
 
@@ -73,13 +80,13 @@
       try {
         // Solicitar permiso para la cámara
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        // Permiso concedido, ocultar la pantalla de carga y mostrar la escena
-        document.getElementById('loader').style.display = 'none';
+        // Permiso concedido, ocultar la pantalla inicial y mostrar la escena
+        document.getElementById('initialScreen').style.display = 'none';
         document.getElementById('sceneId').style.display = 'block';
       } catch (error) {
         // Manejar error al solicitar permiso
         console.error("Permiso denegado:", error);
-        document.getElementById('loader').innerText = "Permiso denegado. No se puede iniciar la AR.";
+        document.getElementById('initialScreen').innerText = "Permiso denegado. No se puede iniciar la Experiencia.";
       }
     }
 
