@@ -21,8 +21,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      background: url('assets/esap-cop.png') no-repeat center center;
-      background-size: cover;
+      background: url('ruta/a/tu/imagen.jpg') no-repeat center center;
+      background-size: contain; /* Cambia a 'contain' o ajusta el tamaño */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -86,7 +86,7 @@
       } catch (error) {
         // Manejar error al solicitar permiso
         console.error("Permiso denegado:", error);
-        document.getElementById('initialScreen').innerText = "Permiso denegado. No se puede iniciar la Experiencia.";
+        document.getElementById('initialScreen').innerText = "Permiso denegado. No se puede iniciar la AR.";
       }
     }
 
