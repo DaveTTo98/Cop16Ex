@@ -43,6 +43,34 @@
           transform: scale(0.5);
           opacity: 0;
         }
+
+        /* HTML: <div class="loader"></div> */
+        .loader {
+          width: 120px;
+          height: 22px;
+          border-radius: 40px;
+          color: #514b82;
+          border: 2px solid;
+          position: relative;
+          overflow: hidden;
+        }
+        .loader::before {
+          content: "";
+          position: absolute;
+          margin: 2px;
+          width: 14px;
+          top: 0;
+          bottom: 0;
+          left: -20px;
+          border-radius: inherit;
+          background: currentColor;
+          box-shadow: -10px 0 12px 3px currentColor;
+          clip-path: polygon(0 5%, 100% 0,100% 100%,0 95%,-30px 50%);
+          animation: l14 1s infinite linear;
+        }
+        @keyframes l14 {
+          100% {left: calc(100% + 20px)}
+        }
     </style>
 </head>
 <body>
@@ -50,8 +78,8 @@
 <div class="intro-screen">
   <div>
     <img src="./assets/esap-cop.png" alt="ESAP COP">
-    <p>Cargando</p>
-    <div style="font-size: 10px; padding: 4px;">1.1.6</div>
+    <div class="loader"></div>
+    <div style="font-size: 10px; padding: 4px;">1.1.7</div>
   </div>
 </div>
 
