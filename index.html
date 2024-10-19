@@ -144,7 +144,7 @@
         <div class="loader-wrap">
             <div class="loader"></div>
             <div class="text">Cargando experiencia.<br>Por favor espera un momento</div>
-            <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.1.11</div>
+            <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.1.12</div>
         </div>
     </div>
 </div>
@@ -154,9 +154,6 @@
          renderer="colorManagement: true, physicallyCorrectLights"
          vr-mode-ui="enabled: false"
          device-orientation-permission-ui="enabled: false">
-         <a-assets>
-            <audio id="esapAudio" src="./assets/sounds/sonido.mp3"></audio>
-          </a-assets>
     <a-assets>
         <audio id="esapAudio" src="./assets/audio/esapAudio.mp3"></audio>
     </a-assets>
@@ -168,11 +165,8 @@
                 position="0.2 -0.5 0"
                 animation-mixer="clip: *;loop: repeat;"
         ></a-entity>
-        <a-sound
-                src="#esapAudio"
-                autoplay="false"
-                on="targetFound: #esapAudio.play; targetLost: #esapAudio.pause"
-                position="0 0 0">
+
+        <a-entity sound="src: #esapAudio"></a-entity>
         </a-sound>
     </a-entity>
 </a-scene>
