@@ -154,6 +154,9 @@
          renderer="colorManagement: true, physicallyCorrectLights"
          vr-mode-ui="enabled: false"
          device-orientation-permission-ui="enabled: false">
+         <a-assets>
+            <audio id="esapAudio" src="./assets/sounds/sonido.mp3"></audio>
+          </a-assets>
     <a-assets>
         <audio id="esapAudio" src="./assets/audio/esapAudio.mp3"></audio>
     </a-assets>
@@ -167,7 +170,7 @@
         ></a-entity>
         <a-sound
                 src="#esapAudio"
-                autoplay="true"
+                autoplay="false"
                 on="targetFound: #esapAudio.play; targetLost: #esapAudio.pause"
                 position="0 0 0">
         </a-sound>
