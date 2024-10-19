@@ -4,48 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR con AR.js y A-Frame</title>
-  <!-- Importar A-Frame 1.6.0 y AR.js -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <!-- Importar A-Frame y AR.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
+  <link rel="stylesheet" href="style/style.css">
 
-  <!-- Estilos para la pantalla inicial -->
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    .initial-screen {
+    .arjs-loader {
       height: 100%;
       width: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      background: url('ruta/a/tu/imagen.jpg') no-repeat center center;
-      background-size: contain; /* Cambia a 'contain' o ajusta el tamaño */
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-size: 1.5em;
-      text-align: center;
-      z-index: 9999; /* Asegúrate de que esté por encima de la escena */
     }
-    #sceneId {
-      display: none; /* Ocultar la escena inicialmente */
+
+    .arjs-loader div {
+      text-align: center;
+      font-size: 1.25em;
+      color: white;
     }
   </style>
 </head>
-<body>
-  <!-- Pantalla inicial con imagen y mensaje -->
-  <div class="initial-screen" id="initialScreen">
-    <div>Solicitando permisos para la cámara...</div>
+<body style="margin: 0; overflow: hidden;">
+  <!-- Loader mínimo mostrado hasta que se carguen los descriptores de imagen -->
+ 
+
+  <img id="logo" src="assets/esap-cop.png" alt="Logo" width="200">
+
+  <!-- Mensaje de solicitud de acceso -->
+  <div id="access-message">
+    Para vivir la experiencia por favor acepta los permisos de cámara de tu dispositivo.
+    <br><br>
+    <button id="allow-button">Permitir</button>
+    <button id="deny-button">Denegar</button>
   </div>
 
   <!-- Escena A-Frame -->
   <a-scene
-    id="sceneId"
     vr-mode-ui="enabled: false;"
     renderer="logarithmicDepthBuffer: true;"
     embedded
@@ -65,7 +67,7 @@
         gltf-model="model/animacion.glb" 
         scale="0.3 0.3 0.3"
         position="0 0 0" 
-        animation-mixer="clip: *; loop: repeat;"
+        animation-mixer="clip: *;loop: repeat;"
       >
       </a-entity>
     </a-nft>
@@ -73,25 +75,71 @@
     <a-entity camera></a-entity>
   </a-scene>
 
-  <!-- Script para manejar la carga y los permisos -->
-  <script>
-    // Función para solicitar permisos
-    async function requestCameraPermissions() {
-      try {
-        // Solicitar permiso para la cámara
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        // Permiso concedido, ocultar la pantalla inicial y mostrar la escena
-        document.getElementById('initialScreen').style.display = 'none';
-        document.getElementById('sceneId').style.display = 'block';
-      } catch (error) {
-        // Manejar error al solicitar permiso
-        console.error("Permiso denegado:", error);
-        document.getElementById('initialScreen').innerText = "Permiso denegado. No se puede iniciar la AR.";
-      }
-    }
 
-    // Iniciar la solicitud de permisos al cargar la página
-    window.addEventListener('load', requestCameraPermissions);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    var audio = document.getElementById('audio');
+
+    // Mostrar mensaje de acceso
+    document.getElementById('access-message').style.display = 'block';
+
+    // Manejar la solicitud de permisos
+    document.getElementById('allow-button').addEventListener('click', function() {
+      document.getElementById('access-message').style.display = 'none'; // Ocultar el mensaje
+      document.getElementById('logo').style.display = 'none'; // Ocultar el logo
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(function(response) {
+            if (response === 'granted') {
+              console.log('Permisos de movimiento concedidos');
+            } else {
+              console.log('Permisos de movimiento denegados por el usuario');
+            }
+          })
+          .catch(function(error) {
+            console.error('Error al solicitar permisos:', error);
+          });
+      }
+    });
+
+    document.getElementById('deny-button').addEventListener('click', function() {
+      document.getElementById('access-message').style.display = 'none'; // También oculta el mensaje al denegar
+      document.getElementById('logo').style.display = 'none'; // Ocultar el logo al denegar
+      console.log('Permisos de movimiento denegados');
+    });
   </script>
+
+
 </body>
 </html>
