@@ -13,16 +13,40 @@
         document.addEventListener('DOMContentLoaded', function () {
             const sceneEl = document.querySelector('a-scene');
             const introScreen = document.querySelector('.intro-screen');
+            const loadingState = document.querySelector('.loading__state');
+            const startButton = document.querySelector('#start-button');
+            const ambient = document.querySelector('#ambient_Sound')
+            const voice = document.querySelector('#voice_Sound');
+
             sceneEl.addEventListener("arReady", (event) => {
-                // Hide the intro screen when AR is ready by adding a class
-                introScreen.classList.add('hidden');
+                loadingState.classList.add('hidden');
+                startButton.classList.remove('hidden');
             });
+
+            function start() {
+                introScreen.classList.add('fadeout');
+                voice.components.sound.playSound();
+                ambient.components.sound.playSound();
+            }
+
+            startButton.addEventListener('click', start);
         })
     </script>
 
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+        }
+
+        .fadeout {
+            transform: scale(0.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .hidden {
+            display: none;
+            visibility: hidden;
         }
 
         .intro-screen {
@@ -72,12 +96,6 @@
         .intro-screen p {
             font-size: 24px;
             margin-top: 20px;
-        }
-
-        .hidden {
-            transform: scale(0.5);
-            opacity: 0;
-            pointer-events: none;
         }
 
         .text {
@@ -147,13 +165,17 @@
                 <img src="./assets/img/bird.png" alt="Bird">
             </div>
             <div class="loader-wrap" style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="loader"></div>
+                <div class="loading__state">
+                    <div class="loader"></div>
+                    <div class="text">Cargando experiencia.<br>Por favor espera un momento</div>
+                </div>
+
                 <div id="start-button"
-                    style="background-color: #009BC9; max-width: 70%; margin: 0 auto; color: white; border-radius: 25px; padding: 10px;"
-                    onclick="startAudios()">
+                     class=""
+                     style="background-color: #009BC9; max-width: 70%; margin: 0 auto; color: white; border-radius: 25px; padding: 10px;">
                     Inicia la experiencia virtual
                 </div>
-                <!-- <div class="text">Cargando experiencia.<br>Por favor espera un momento</div> -->
+
                 <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.1.19</div>
             </div>
         </div>
@@ -161,6 +183,11 @@
     <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.1; filterBeta: 10"  color-space="sRGB"
         renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false">
+        <a-assets>
+            <audio id="ambient_Sound" src="./assets/audio/ambient.mp3" loop="true"  autoplay="false" preload="auto"></audio>
+            <audio id="voice_Sound" src="./assets/audio/voice.mp3"  autoplay="false" preload="auto"></audio>
+        </a-assets>
+
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
@@ -170,28 +197,8 @@
                 <a-sound id="voice" autoplay="false" position="0 0 0"></a-sound> 
             </a-entity>
         </a-entity>
-        <a-assets>
-            <audio id="ambient_Sound" src="./assets/audio/ambient.mp3" loop="true"  autoplay="false" preload="auto"></audio> 
-                <audio id="voice_Sound" src="./assets/audio/voice.mp3"  autoplay="false" preload="auto"></audio>
-           </a-assets>
     </a-scene>
 
-
-
-
-
-
-
-
-     <script>
-    function StartAudios(){
-        document.getElementById('#start-button');
-        const ambient = document.querySelector('#ambient_Sound')
-        const voice = document.querySelector('#voice_Sound');
-        voice.components.sound.playSound();
-        ambient.components.sound.playSound();
-    }
-</script> 
 </body>
 
 </html>
