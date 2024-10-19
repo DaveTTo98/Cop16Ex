@@ -35,7 +35,7 @@
 <body style="margin: 0; overflow: hidden;">
   <!-- Loader mínimo mostrado hasta que se carguen los descriptores de imagen -->
 
-  <div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.0.8</div>
+  <div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.0.9</div>
 
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
@@ -50,21 +50,22 @@
     <!-- a-nft es el ancla que define una entidad de seguimiento de imagen -->
     <a-nft
       type="nft"
-      url="https://davetto98.github.io/Cop16Ex/assets/nft/qr/esap"
+      url="https://davetto98.github.io/Cop16Ex/assets/nft/esap/EsapLogo"
       smooth="true"
       smoothCount="10"
       smoothTolerance="0.01"
       smoothThreshold="5"
       emitevents="true"
     >
+      <a-sky color="#ECECEC"></a-sky>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <!-- Definición del contenido a mostrar: aquí se incluye el modelo GLTF -->
-      <a-entity
+      <!-- <a-entity
         gltf-model="./model/animacion.glb"
         scale="0.3 0.3 0.3"
         position="0 0 0" 
         animation-mixer="clip: *;loop: repeat;"
-      >
-      </a-entity>
+      ></a-entity> -->
     </a-nft>
     <!-- Cámara estática que se mueve según los movimientos del dispositivo -->
     <a-entity camera></a-entity>
