@@ -1,81 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR con AR.js y A-Frame</title>
-  <!-- Importar A-Frame y AR.js -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
-  <link rel="stylesheet" href="style/style.css">
-
-  <style>
-    .arjs-loader {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .arjs-loader div {
-      text-align: center;
-      font-size: 1.25em;
-      color: white;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
 </head>
-<body style="margin: 0; overflow: hidden;">
-  <!-- Loader mínimo mostrado hasta que se carguen los descriptores de imagen -->
+<body>
+<div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.1.0</div>
 
-  <div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.0.10</div>
-
-  <div class="arjs-loader">
-    <div>Loading, please wait...</div>
-  </div>
-
-  <!-- Escena A-Frame -->
-  <a-scene
-    vr-mode-ui="enabled: false;"
-    renderer="logarithmicDepthBuffer: true;"
-    embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
-  >
-    <!-- a-nft es el ancla que define una entidad de seguimiento de imagen -->
-    <a-nft
-      type="nft"
-      url="./assets/nft/bird/bird"
-      smooth="true"
-      smoothCount="10"
-      smoothTolerance="0.01"
-      smoothThreshold="5"
-      emitevents="true"
-    >
-      <a-sky color="#ECECEC"></a-sky>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <!-- Definición del contenido a mostrar: aquí se incluye el modelo GLTF -->
-      <!-- <a-entity
-        gltf-model="./model/animacion.glb"
-        scale="0.3 0.3 0.3"
-        position="0 0 0" 
-        animation-mixer="clip: *;loop: repeat;"
-      ></a-entity> -->
-    </a-nft>
-    <!-- Cámara estática que se mueve según los movimientos del dispositivo -->
-    <a-entity camera></a-entity>
-  </a-scene>
-
+<a-scene mindar-image="imageTargetSrc: ./assets/mind/target.mind"
+         color-space="sRGB"
+         renderer="colorManagement: true, physicallyCorrectLights"
+         vr-mode-ui="enabled: false"
+         device-orientation-permission-ui="enabled: false">
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+  <a-entity mindar-image-target="targetIndex: 0">
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+  </a-entity>
+</a-scene>
 </body>
-
-<script>
-  window.addEventListener("arjs-nft-loaded", (event) => {
-    // Hide loading overlay
-  });
-</script>
 </html>
