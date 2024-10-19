@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
-<div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.1.1</div>
+<div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.1.2</div>
 
 <a-scene mindar-image="imageTargetSrc: https://davetto98.github.io/Cop16Ex/assets/mind/targets.mind"
          color-space="sRGB"
@@ -15,7 +15,12 @@
          device-orientation-permission-ui="enabled: false">
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
   <a-entity mindar-image-target="targetIndex: 0">
-    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-entity
+            gltf-model="./model/animacion.glb"
+            scale="0.3 0.3 0.3"
+            position="0 0 0"
+            animation-mixer="clip: *;loop: repeat;"
+    ></a-entity>
   </a-entity>
 </a-scene>
 </body>
