@@ -188,13 +188,20 @@
 
 
 <script>
-    function StartAudios(){
-        document.getElementById('#start-button').style.display= 'none';
+    function onArReady() {
+      const introScreen = document.querySelector('.intro-screen');
+      introScreen.style.display = 'none';
+
+      setTimeout(() => {
+        // Obtener los elementos de sonido
+        //const ambient = document.querySelector('#ambient');
         const voice = document.querySelector('#voice');
-        //const ambient = document.querySelector('#ambient')
-        voice.components.sound.playSound();
-        //ambient.components.sound.playSound();
+
+        // Reproducir audio 1 en loop y audio 2 una sola vez
+        audio1.components.sound.playSound();
+        audio2.components.sound.playSound();
+      }, 500); // Ajusta el tiempo según sea necesario
     }
-</script>
+  </script>
 </body>
 </html>
