@@ -1,28 +1,146 @@
-<!--<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>-->
-<script src='../../../../aframe/build/aframe-ar-nft.js'></script>
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR con AR.js y A-Frame</title>
+    <!-- Importar A-Frame y AR.js -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
+    <link rel="stylesheet" href="style/style.css  ">
 
+    <style>
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-<body style='margin : 0px; overflow: hidden;'>
-   <!-- minimal loader shown until image descriptors are loaded -->
-  <div class="arjs-loader">
-    <div>Loading, please wait...</div>
-  </div>
+      .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <!-- Loader mínimo mostrado hasta que se carguen los descriptores de imagen -->
+  
+
+    <img id="logo" src="assets/esap-cop.png" alt="Logo" width="200">
+
+    <!-- Mensaje de solicitud de acceso -->
+    <div id="access-message">
+      Para vivir la experiencia por favor acepta los permisos de cámara de tu dispositivo.
+      <br><br>
+      <button id="allow-button">Permitir</button>
+      <button id="deny-button">Denegar</button>
+      <div style="font-size: 10px; opacity: 0.2;">v1.0.1</div>
+    </div>
+
+    <!-- Escena A-Frame -->
     <a-scene
-        vr-mode-ui='enabled: false;'
-        renderer="logarithmicDepthBuffer: true; precision: medium;"
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
-
-        <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
-        <a-nft
-            type='nft' url='assets/CopLogo'
-            smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
-            <a-entity
-                gltf-model='model/animacion.glb'
-                scale="5 5 5"
-                position="0 0 0"
-                >
-            </a-entity>
-        </a-nft>
-		<a-entity camera></a-entity>
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono; debugUIEnabled: false;">
+    >
+      <!-- a-nft es el ancla que define una entidad de seguimiento de imagen -->
+      <a-nft
+        type="nft"
+        url="assets/CopLogo" 
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
+      >
+        <!-- Definición del contenido a mostrar: aquí se incluye el modelo GLTF -->
+        <a-entity
+          gltf-model="model/animacion.glb" 
+          scale="0.3 0.3 0.3"
+          position="0 0 0" 
+          animation-mixer="clip: *;loop: repeat;"
+        >
+        </a-entity>
+      </a-nft>
+      <!-- Cámara estática que se mueve según los movimientos del dispositivo -->
+      <a-entity camera></a-entity>
     </a-scene>
-</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+      var audio = document.getElementById('audio');
+
+      // Mostrar mensaje de acceso
+      document.getElementById('access-message').style.display = 'block';
+
+      // Manejar la solicitud de permisos
+      document.getElementById('allow-button').addEventListener('click', function() {
+        document.getElementById('access-message').style.display = 'none'; // Ocultar el mensaje
+        document.getElementById('logo').style.display = 'none'; // Ocultar el logo
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+          DeviceMotionEvent.requestPermission()
+            .then(function(response) {
+              if (response === 'granted') {
+                console.log('Permisos de movimiento concedidos');
+              } else {
+                console.log('Permisos de movimiento denegados por el usuario');
+              }
+            })
+            .catch(function(error) {
+              console.error('Error al solicitar permisos:', error);
+            });
+        }
+      });
+
+      document.getElementById('deny-button').addEventListener('click', function() {
+        document.getElementById('access-message').style.display = 'none'; // También oculta el mensaje al denegar
+        document.getElementById('logo').style.display = 'none'; // Ocultar el logo al denegar
+        console.log('Permisos de movimiento denegados');
+      });
+    </script>
+
+
+  </body>
+  </html>
