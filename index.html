@@ -6,7 +6,7 @@
   <title>AR con AR.js y A-Frame</title>
   <!-- Importar A-Frame y AR.js -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
   <link rel="stylesheet" href="style/style.css">
@@ -37,17 +37,20 @@
 
   <div style="position: fixed; background-color:#fff; top: 10px;right: 10px; z-index: 100; font-size: 10px; padding: 4px;">1.0.5</div>
 
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+
   <!-- Escena A-Frame -->
   <a-scene
     vr-mode-ui="enabled: false;"
     renderer="logarithmicDepthBuffer: true;"
-    embedded
-    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
+    embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
   >
     <!-- a-nft es el ancla que define una entidad de seguimiento de imagen -->
     <a-nft
       type="nft"
-      url="./assets/ntf/qr/Esap"
+      url="./assets/nft/qr/esap"
       smooth="true"
       smoothCount="10"
       smoothTolerance="0.01"
@@ -67,4 +70,11 @@
   </a-scene>
 
 </body>
+
+<script>
+  window.addEventListener("arjs-nft-loaded", (event) => {
+    // Hide loading overlay
+    alert("Cargado");
+  });
+</script>
 </html>
