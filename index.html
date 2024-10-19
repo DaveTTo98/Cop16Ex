@@ -79,7 +79,7 @@
   <div>
     <img src="./assets/esap-cop.png" alt="ESAP COP">
     <div class="loader"></div>
-    <div style="font-size: 10px; padding: 4px;">1.1.7</div>
+    <div style="font-size: 10px; padding: 4px;">1.1.8</div>
   </div>
 </div>
 
@@ -88,6 +88,9 @@
          renderer="colorManagement: true, physicallyCorrectLights"
          vr-mode-ui="enabled: false"
          device-orientation-permission-ui="enabled: false">
+         <a-assets>
+          <audio id="esapAudio" src="./assets/audio/esapAudio.mp3"></audio>
+         </a-assets>
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
   <a-entity mindar-image-target="targetIndex: 0">
     <a-entity
@@ -96,6 +99,12 @@
             position="0 0 0"
             animation-mixer="clip: *;loop: repeat;"
     ></a-entity>
+    <a-sound
+      src="#esapAudio"
+      autoplay="true"
+      on="targetFound: #esapAudio.play; targetLost: #esapAudio.pause"
+      position="0 0 0">
+    </a-sound>
   </a-entity>
 </a-scene>
 </body>
