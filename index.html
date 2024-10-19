@@ -51,15 +51,15 @@
     vr-mode-ui="enabled: false;"
     renderer="logarithmicDepthBuffer: true;"
     embedded
-    arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
   >
     <!-- a-nft es el ancla que define una entidad de seguimiento de imagen -->
     <a-nft
       type="nft"
-      url="assets/copactivate" 
+      url="assets/esap/EsapLogo"
       smooth="true"
       smoothCount="10"
-      smoothTolerance=".01"
+      smoothTolerance="0.01"
       smoothThreshold="5"
     >
       <!-- Definición del contenido a mostrar: aquí se incluye el modelo GLTF -->
@@ -74,39 +74,6 @@
     <!-- Cámara estática que se mueve según los movimientos del dispositivo -->
     <a-entity camera></a-entity>
   </a-scene>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <script>
     var audio = document.getElementById('audio');
@@ -139,7 +106,6 @@
       console.log('Permisos de movimiento denegados');
     });
   </script>
-
 
 </body>
 </html>
