@@ -15,8 +15,8 @@
             const introScreen = document.querySelector('.intro-screen');
             const loadingState = document.querySelector('.loading__state');
             const startButton = document.querySelector('#start-button');
-            const ambient = document.querySelector('#ambient_Sound')
-            const voice = document.querySelector('#voice_Sound');
+            const ambient = document.querySelector('#entity_ambient');
+            const voice = document.querySelector('#entity_voice');
 
             sceneEl.addEventListener("arReady", (event) => {
                 loadingState.classList.add('hidden');
@@ -170,18 +170,17 @@
                     <div class="text">Cargando experiencia.<br>Por favor espera un momento</div>
                 </div>
 
-                <div id="start-button"
-                     class="hidden"
-                     style="background-color: #009BC9; max-width: 70%; margin: 0 auto; color: white; border-radius: 25px; padding: 10px;">
-                    Inicia la experiencia virtual
+                <div id="start-button" class="hidden"
+                    style="background-color: #009BC9; max-width: 70%; margin: 0 auto; color: white; border-radius: 25px; padding: 10px 2rem; box-shadow: 0 3px 25px #009ac937 ;">
+                    Inicia la experiencia
                 </div>
 
-                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.1.21</div>
+                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.0</div>
             </div>
         </div>
     </div>
-    <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.1; filterBeta: 10"  color-space="sRGB"
-        renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.1; filterBeta: 10"
+        color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false">
         <a-assets>
             <audio id="ambient_sound" src="./assets/audio/ambient.mp3" preload="auto"></audio>
@@ -189,12 +188,12 @@
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        <a-entity sound="src: #ambient_sound; loop: true"></a-entity>
+        <a-entity id="entity_ambient" sound="src: #ambient_sound; loop: true"></a-entity>
 
         <a-entity mindar-image-target="targetIndex: 0">
             <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.3 0.3 0.3" position="0.2 -0.5 0"
                 animation-mixer="clip: *;loop: repeat;"></a-entity>
-            <a-entity sound="src: #voice_sound"></a-entity>
+            <a-entity id="entity_voice" sound="src: #voice_sound"></a-entity>
         </a-entity>
     </a-scene>
 
