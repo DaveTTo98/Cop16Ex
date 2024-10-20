@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let voice = document.getElementById('voice_sound');
     const imageTarget = document.querySelector('#image_target');
 
-    /*sceneEl.addEventListener("arReady", (event) => {
+    sceneEl.addEventListener("arReady", (event) => {
         loadingState.classList.add('hidden');
         startButton.classList.remove('hidden');
-    });*/
+    });
 
     function start() {
         introScreen.classList.add('fadeout');
@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
         initVoiceAudio();
     }
 
-    // imageTarget.addEventListener("targetFound", event => playVoice());
-    // imageTarget.addEventListener("targetLost", event => stopVoice());
+    imageTarget.addEventListener("targetFound", event => playVoice());
+    imageTarget.addEventListener("targetLost", event => stopVoice());
 
     startButton.addEventListener('click', start);
 
@@ -72,10 +72,5 @@ document.addEventListener('DOMContentLoaded', function () {
         startVoiceAudio();
         voiceLoaded = true;
     }
-
-    const startVoiceButton = document.querySelector('#start-voice-button');
-    startVoiceButton.addEventListener('click', async () => {
-        await initVoiceAudio();
-    });
 
 })
