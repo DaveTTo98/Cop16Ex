@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function start() {
         introScreen.classList.add('fadeout');
         ambient.components.sound.playSound();
-        initVoiceAudio();
+        // initVoiceAudio();
     }
 
-    imageTarget.addEventListener("targetFound", event => playVoice());
-    imageTarget.addEventListener("targetLost", event => stopVoice());
+    imageTarget.addEventListener("targetFound", event => initVoiceAudio());
+    // imageTarget.addEventListener("targetLost", event => stopVoice());
 
     startButton.addEventListener('click', start);
 
