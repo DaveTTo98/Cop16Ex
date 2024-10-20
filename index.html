@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
     <link rel="icon" href="./assets/img/icons/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+    <script src="./js/utils.js"></script>
     <script src="main.js"></script>
 </head>
 
@@ -29,32 +30,34 @@
                     <div class="text">Cargando experiencia.<br>Por favor espera un momento</div>
                 </div>
 
-                <div id="start-button" class="hidden"
-                    style="background-color: #009BC9; max-width: 70%; margin: 0 auto; color: white; border-radius: 25px; padding: 10px 2rem; box-shadow: 0 3px 25px #009ac937 ;">
+                <div id="start-button" class="hidden">
                     Inicia la experiencia
                 </div>
 
-                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.7</div>
+                <div class="version-text">1.2.8</div>
             </div>
         </div>
     </div>
+
     <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.0001; filterBeta: 0.001"
         color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false">
         <a-assets>
             <audio id="ambient_sound" src="./assets/audio/ambient.mp3" preload="auto"></audio>
-            <audio id="voice_sound" src="./assets/audio/voice.mp3" preload="auto"></audio>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="entity_ambient" sound="src: #ambient_sound; loop: true"></a-entity>
-        <a-entity id="entity_voice" sound="src: #voice_sound; volume: 0;"></a-entity>
 
         <a-entity id="image_target" mindar-image-target="targetIndex: 0">
             <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.7 0.7 0.7" position="0.3.5 -0.6 0"
                 animation-mixer="clip: *;loop: repeat;"></a-entity>
         </a-entity>
     </a-scene>
+
+    <audio id="voice_sound">
+        <source src="./assets/audio/voice.mp3" type="audio/mpeg">
+    </audio>
 
 </body>
 
