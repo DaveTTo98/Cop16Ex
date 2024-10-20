@@ -45,3 +45,5 @@ function fadeOutSound(audioElement, duration = 2000) {
     // Start the fade effect
     fade();
 }
+
+

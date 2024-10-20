@@ -96,7 +96,7 @@ body {
     animation: l14 1s infinite linear;
 }
 
-#start-button {
+.app-btn {
     background-color: #009BC9;
     max-width: 70%;
     margin: 0 auto;
