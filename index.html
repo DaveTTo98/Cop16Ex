@@ -33,7 +33,7 @@
                 ambient.components.sound.playSound();
                 setTimeout(() => {
                     voice.components.sound.playSound();
-                }, 2000);
+                }, 5000);
             }
 
             startButton.addEventListener('click', start);
@@ -182,7 +182,7 @@
                     Inicia la experiencia
                 </div>
 
-                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.4</div>
+                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.5</div>
             </div>
         </div>
     </div>
@@ -196,11 +196,11 @@
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="entity_ambient" sound="src: #ambient_sound; loop: true"></a-entity>
+        <a-entity id="entity_voice" sound="src: #voice_sound"></a-entity>
 
         <a-entity id="image_target" mindar-image-target="targetIndex: 0">
             <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.3 0.3 0.3" position="0.2 -0.5 0"
                 animation-mixer="clip: *;loop: repeat;"></a-entity>
-            <a-entity id="entity_voice" sound="src: #voice_sound"></a-entity>
         </a-entity>
     </a-scene>
 
