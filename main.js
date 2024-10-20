@@ -19,17 +19,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initVoiceAudio() {
-        voice.volume = 0;
         voice.play();
+        voice.volume = 0;
     }
 
     function playVoice() {
         voice.currentTime = 0;
-        fadeInSound(voice);
+        voice.volume = 1;
+        // fadeInSound(voice);
     }
 
     function stopVoice() {
-        fadeOutSound(voice);
+        // fadeOutSound(voice);
+        voice.volume = 0;
     }
 
     imageTarget.addEventListener("targetFound", event => playVoice());
