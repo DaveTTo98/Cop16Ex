@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initVoiceAudio() {
+        voice.volume = 0.1;
         voice.play();
-        voice.volume = 0;
     }
 
     function playVoice() {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function stopVoice() {
         // fadeOutSound(voice);
-        voice.volume = 0;
+        voice.volume = 0.1;
     }
 
     imageTarget.addEventListener("targetFound", event => playVoice());
