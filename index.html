@@ -17,15 +17,19 @@
             const startButton = document.querySelector('#start-button');
             const ambient = document.querySelector('#entity_ambient');
             const voice = document.querySelector('#entity_voice');
+            const imageTarget = document.querySelector('#image_target');
 
             sceneEl.addEventListener("arReady", (event) => {
                 loadingState.classList.add('hidden');
                 startButton.classList.remove('hidden');
             });
 
+            imageTarget.addEventListener("targetFound", event => {
+                voice.components.sound.playSound();
+            });
+
             function start() {
                 introScreen.classList.add('fadeout');
-                voice.components.sound.playSound();
                 ambient.components.sound.playSound();
             }
 
@@ -175,7 +179,7 @@
                     Inicia la experiencia
                 </div>
 
-                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.0</div>
+                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.1</div>
             </div>
         </div>
     </div>
@@ -190,7 +194,7 @@
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="entity_ambient" sound="src: #ambient_sound; loop: true"></a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity id="image_target" mindar-image-target="targetIndex: 0">
             <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.3 0.3 0.3" position="0.2 -0.5 0"
                 animation-mixer="clip: *;loop: repeat;"></a-entity>
             <a-entity id="entity_voice" sound="src: #voice_sound"></a-entity>
