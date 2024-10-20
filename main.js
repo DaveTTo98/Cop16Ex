@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function startVoiceAudio() {
-        voiceGain.gain.setValueAtTime(0.01, audioContext.currentTime);
+        voiceGain.gain.setValueAtTime(0.5, audioContext.currentTime);
         voiceSource = playAudio(voiceBuffer, voiceGain, false);
     }
 
