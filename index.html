@@ -1,6 +1,7 @@
-<html>
+<html translate="no" lang="en">
 
 <head>
+    <title>ESAP COP16</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
@@ -8,157 +9,8 @@
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
     <link rel="icon" href="./assets/img/icons/favicon.png" type="image/x-icon">
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const sceneEl = document.querySelector('a-scene');
-            const introScreen = document.querySelector('.intro-screen');
-            const loadingState = document.querySelector('.loading__state');
-            const startButton = document.querySelector('#start-button');
-            const ambient = document.querySelector('#entity_ambient');
-            const voice = document.querySelector('#entity_voice');
-            const imageTarget = document.querySelector('#image_target');
-
-            sceneEl.addEventListener("arReady", (event) => {
-                loadingState.classList.add('hidden');
-                startButton.classList.remove('hidden');
-            });
-
-            /*imageTarget.addEventListener("targetFound", event => {
-                voice.components.sound.playSound();
-            });*/
-
-            function start() {
-                introScreen.classList.add('fadeout');
-                ambient.components.sound.playSound();
-                setTimeout(() => {
-                    voice.components.sound.playSound();
-                }, 5000);
-            }
-
-            startButton.addEventListener('click', start);
-        })
-    </script>
-
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .fadeout {
-            transform: scale(0.5);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .hidden {
-            display: none;
-            visibility: hidden;
-        }
-
-        .intro-screen {
-            overflow: hidden;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 4rem);
-            padding: 2rem 0;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            transition: transform, opacity ease-in-out 0.35s;
-            background-image: url('./assets/img/bg-top.png'), url('./assets/img/bg-bottom.png');
-            background-position: top, bottom;
-            background-repeat: repeat-x;
-        }
-
-        .intro-screen__wrap {
-            width: 100%;
-            height: calc(100vh - 4rem);
-            max-width: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            text-align: center;
-        }
-
-        .logo img {
-            width: 170px;
-            height: auto;
-        }
-
-        .intro-screen .bird-image {
-            animation: bounce 2s infinite;
-        }
-
-        .intro-screen .bird-image img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .intro-screen p {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-
-        .text {
-            padding-top: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #144A8A;
-        }
-
-        /* HTML: <div class="loader"></div> */
-        .loader {
-            width: 120px;
-            height: 10px;
-            margin: 0 auto;
-            border-radius: 40px;
-            color: #009BC9;
-            border: 2px solid;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loader::before {
-            content: "";
-            position: absolute;
-            margin: 2px;
-            width: 14px;
-            top: 0;
-            bottom: 0;
-            left: -20px;
-            border-radius: inherit;
-            background: currentColor;
-            box-shadow: -10px 0 12px 3px currentColor;
-            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%, -30px 50%);
-            animation: l14 1s infinite linear;
-        }
-
-        @keyframes l14 {
-            100% {
-                left: calc(100% + 20px)
-            }
-        }
-
-        @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-30px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
 </head>
 
 <body>
@@ -182,11 +34,11 @@
                     Inicia la experiencia
                 </div>
 
-                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.5</div>
+                <div style="font-size: 10px; padding: 4px; opacity: 0.7; color: #144A8A;">1.2.6</div>
             </div>
         </div>
     </div>
-    <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.1; filterBeta: 10"
+    <a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; filterMinCF:0.0001; filterBeta: 0.001"
         color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false">
         <a-assets>
@@ -196,10 +48,10 @@
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="entity_ambient" sound="src: #ambient_sound; loop: true"></a-entity>
-        <a-entity id="entity_voice" sound="src: #voice_sound"></a-entity>
+        <a-entity id="entity_voice" sound="src: #voice_sound; volume: 0;"></a-entity>
 
         <a-entity id="image_target" mindar-image-target="targetIndex: 0">
-            <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.3 0.3 0.3" position="0.2 -0.5 0"
+            <a-entity gltf-model="./model/Esap_animacion.glb" scale="0.5 0.5 0.5" position="0.2 -0.5 0"
                 animation-mixer="clip: *;loop: repeat;"></a-entity>
         </a-entity>
     </a-scene>

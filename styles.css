@@ -1,0 +1,117 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.fadeout {
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.intro-screen {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 4rem);
+    padding: 2rem 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: transform, opacity ease-in-out 0.35s;
+    background-image: url('./assets/img/bg-top.png'), url('./assets/img/bg-bottom.png');
+    background-position: top, bottom;
+    background-repeat: repeat-x;
+}
+
+.intro-screen__wrap {
+    width: 100%;
+    height: calc(100vh - 4rem);
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.logo img {
+    width: 170px;
+    height: auto;
+}
+
+.intro-screen .bird-image {
+    animation: bounce 2s infinite;
+}
+
+.intro-screen .bird-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.intro-screen p {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.text {
+    padding-top: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #144A8A;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 120px;
+    height: 10px;
+    margin: 0 auto;
+    border-radius: 40px;
+    color: #009BC9;
+    border: 2px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader::before {
+    content: "";
+    position: absolute;
+    margin: 2px;
+    width: 14px;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    border-radius: inherit;
+    background: currentColor;
+    box-shadow: -10px 0 12px 3px currentColor;
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%, -30px 50%);
+    animation: l14 1s infinite linear;
+}
+
+@keyframes l14 {
+    100% {
+        left: calc(100% + 20px)
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
