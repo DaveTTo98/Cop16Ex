@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingState = document.querySelector('.loading__state');
     const startButton = document.querySelector('#start-button');
     const ambient = document.querySelector('#entity_ambient');
-    let voice = document.getElementById('voice_sound');
     const imageTarget = document.querySelector('#image_target');
 
     sceneEl.addEventListener("arReady", (event) => {
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function start() {
         introScreen.classList.add('fadeout');
         ambient.components.sound.playSound();
-        // initVoiceAudio();
     }
 
     imageTarget.addEventListener("targetFound", event => initVoiceAudio());
@@ -66,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function initVoiceAudio() {
-        if (voiceLoaded || voiceLoading) return;
+        // if (voiceLoaded || voiceLoading) return;
         voiceLoading = true;
         await initAudio();
         startVoiceAudio();
