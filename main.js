@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ambient.components.sound.playSound();
     }
 
-    imageTarget.addEventListener("targetFound", event => initVoiceAudio());
+    // imageTarget.addEventListener("targetFound", event => initVoiceAudio());
     // imageTarget.addEventListener("targetLost", event => stopVoice());
 
     startButton.addEventListener('click', start);
