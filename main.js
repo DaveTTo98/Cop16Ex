@@ -51,41 +51,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startVoiceAudio() {
         voiceSource = playAudio(voiceBuffer, voiceGain, false);
-        voiceGain.gain.setValueAtTime(0.1, audioContext.currentTime);
-    }
-
-
-    const startVoiceButton = document.querySelector('#start-voice-button');
-    startVoiceButton.addEventListener('click', async () => {
-        await initAudio();
-        startVoiceAudio();
-    });
-
-
-
-
-
-
-
-
-
-
-    function initVoiceAudio() {
-        voice.volume = 0.0001;
-        voice.play();
+        voiceGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
     }
 
     function playVoice() {
-        voice.currentTime = 0;
-        voice.volume = 1;
+        voiceGain.gain.setValueAtTime(0.7, audioContext.currentTime);
         setTimeout(() => {
             stopVoice();
         }, 3600);
     }
 
     function stopVoice() {
-        // fadeOutSound(voice);
-        voice.volume = 0.0001;
+        voiceGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
     }
+
+    async function initVoiceAudio() {
+        await initAudio();
+        startVoiceAudio();
+    }
+
+    const startVoiceButton = document.querySelector('#start-voice-button');
+    startVoiceButton.addEventListener('click', async () => {
+        await initVoiceAudio();
+    });
 
 })
