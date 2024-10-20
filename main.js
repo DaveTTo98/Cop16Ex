@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingState = document.querySelector('.loading__state');
     const startButton = document.querySelector('#start-button');
     const ambient = document.querySelector('#entity_ambient');
-    const voice = document.getElementById('voice_sound');
+    let voice = document.getElementById('voice_sound');
     const imageTarget = document.querySelector('#image_target');
 
     sceneEl.addEventListener("arReady", (event) => {
@@ -19,20 +19,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initVoiceAudio() {
-        voice.volume = 0.1;
+        voice.volume = 0.0001;
         voice.play();
     }
 
     function playVoice() {
         voice.currentTime = 0;
         voice.volume = 1;
-        // fadeInSound(voice);
+        setTimeout(() => {
+            stopVoice();
+        }, 3600);
     }
 
     function stopVoice() {
         // fadeOutSound(voice);
-        voice.volume = 0.1;
+        voice.volume = 0.0001;
     }
+
+    voice.addEventListener('ended', event => {
+        console.log('voice ended');
+    });
 
     imageTarget.addEventListener("targetFound", event => playVoice());
     imageTarget.addEventListener("targetLost", event => stopVoice());
