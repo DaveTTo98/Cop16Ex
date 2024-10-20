@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /**
      * Voice audio logic
      */
-    let audioContext, voiceBuffer, voiceSource, voiceGain;
+    let audioContext, voiceBuffer, voiceSource, voiceGain, voiceLoaded = false, voiceLoading = false;
 
     async function loadAudio(url) {
         const response = await fetch(url);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startVoiceAudio() {
         voiceSource = playAudio(voiceBuffer, voiceGain, false);
-        voiceGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+        voiceGain.gain.setValueAtTime(0.1, audioContext.currentTime);
     }
 
     function playVoice() {
@@ -66,8 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function initVoiceAudio() {
+        if (voiceLoaded || voiceLoading) return;
+        voiceLoading = true;
         await initAudio();
         startVoiceAudio();
+        voiceLoaded = true;
     }
 
     const startVoiceButton = document.querySelector('#start-voice-button');
